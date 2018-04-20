@@ -1,6 +1,7 @@
 import copy
 import json
 import os
+import matplotlib.pyplot as plt
 
 from PIL import Image, ImageDraw
 
@@ -33,12 +34,12 @@ def preprocess(png='screenshot.png'):
     img_copy = ImageDraw.Draw(img_ex)
     pixels = img.load()
     positions = []
-    top, bottom = (650, 1800)
+    top, bottom = (450, 1280)
     while top < bottom:
         pixel = pixels[500, top]
         find = True
         if 200 < pixel[0] < 240:
-            left, right = (80, 800)
+            left, right = (80, 600)
             while left < right:
                 if pixels[left, top] != pixel:
                     find = False
@@ -50,16 +51,21 @@ def preprocess(png='screenshot.png'):
                 top += 10
         top += 1
     img_ex.save('screenshot_dev.png')
+
+    #plt.imshow(img_ex)  # 显示图片
+    #plt.axis('off')  # 不显示坐标轴
+    #plt.show()
+
     x1, x2, x3, x4, x5 = positions[:5]
     return (x1+x2)/2, (x2+x3)/2, (x3+x4)/2, (x4+x5)/2
 
 
 def tap_option(y):
-    os.popen('adb shell input tap 140 {}'.format(y))
+    os.popen('adb shell input tap 100 {}'.format(y))
 
 
 def tap_next():
-    os.popen('adb shell input tap 888 1800')
+    os.popen('adb shell input tap 575 1212')
 
 
 def screenshot():

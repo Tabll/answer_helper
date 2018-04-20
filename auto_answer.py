@@ -9,9 +9,10 @@ for i in islice(fetch_que_ans(), num, None):
     positions = preprocess()
     for j in i:
         tap_option(positions[j])
+        print(j)
         sleep(0.5)
     num += 1
     print(num)
     if num > 60:
         tap_next()
-    sleep(1)
+    sleep(1.5)
